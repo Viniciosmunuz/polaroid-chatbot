@@ -6,11 +6,19 @@ const { Client } = require('whatsapp-web.js');
 //                       CONFIGURAÇÕES GERAIS
 // ═══════════════════════════════════════════════════════════════════
 
+console.log('\n╔════════════════════════════════════════════════════════════════╗');
+console.log('║           🤖 BOT POLAROID CHATBOT INICIANDO...                ║');
+console.log('╚════════════════════════════════════════════════════════════════╝\n');
+
 const client = new Client();
 const userStages = {};
 const userData = {};
 const INACTIVITY_TIMEOUT = 30 * 60 * 1000;
 const ownerNumber = process.env.OWNER_NUMBER || '5592999130838@c.us';
+
+console.log('✅ Configurações carregadas');
+console.log('📱 Número do proprietário:', ownerNumber);
+console.log('⏳ Aguardando conexão com WhatsApp...\n');
 
 // ═══════════════════════════════════════════════════════════════════
 //                      FUNÇÕES AUXILIARES
@@ -43,6 +51,15 @@ client.on('qr', qr => {
 
 client.on('ready', () => {
     console.log('✅ Bot WhatsApp conectado e pronto para receber mensagens!');
+});
+
+// Handler de erros
+client.on('error', error => {
+    console.error('❌ ERRO NO BOT:', error);
+});
+
+process.on('unhandledRejection', error => {
+    console.error('❌ ERRO NÃO TRATADO:', error);
 });
 
 client.initialize();

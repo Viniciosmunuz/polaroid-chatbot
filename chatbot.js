@@ -27,9 +27,18 @@ client.on('qr', qr => {
     console.log('\n╔════════════════════════════════════════════════════════════════╗');
     console.log('║                     QR CODE GERADO                            ║');
     console.log('╚════════════════════════════════════════════════════════════════╝\n');
+    
+    // Gera o QR code visual
     qrcode.generate(qr, { small: true });
-    console.log('\n✅ QR Code URL:', qr);
-    console.log('\n💡 Dica: Escaneie o código acima com seu WhatsApp Web para conectar!\n');
+    
+    // Log detalhado da URL
+    console.log('\n' + '═'.repeat(70));
+    console.log('📱 QR CODE URL:');
+    console.log('═'.repeat(70));
+    console.log(qr);
+    console.log('═'.repeat(70));
+    console.log('💡 Dica: Escaneie o QR code acima com seu WhatsApp Web para conectar!');
+    console.log('═'.repeat(70) + '\n');
 });
 
 client.on('ready', () => {

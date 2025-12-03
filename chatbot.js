@@ -24,7 +24,12 @@ const isInitialTrigger = text => /(oi|ola|olá|menu|boa tarde|boa noite|bom dia)
 // ═══════════════════════════════════════════════════════════════════
 
 client.on('qr', qr => {
+    console.log('\n╔════════════════════════════════════════════════════════════════╗');
+    console.log('║                     QR CODE GERADO                            ║');
+    console.log('╚════════════════════════════════════════════════════════════════╝\n');
     qrcode.generate(qr, { small: true });
+    console.log('\n✅ QR Code URL:', qr);
+    console.log('\n💡 Dica: Escaneie o código acima com seu WhatsApp Web para conectar!\n');
 });
 
 client.on('ready', () => {

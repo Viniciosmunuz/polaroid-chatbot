@@ -1,6 +1,6 @@
 require('dotenv').config();
 const qrcode = require('qrcode-terminal');
-const { Client } = require('whatsapp-web.js');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 
 // ═══════════════════════════════════════════════════════════════════
 //                       CONFIGURAÇÕES GERAIS
@@ -10,7 +10,15 @@ console.log('\n╔════════════════════�
 console.log('║           🤖 BOT POLAROID CHATBOT INICIANDO...                ║');
 console.log('╚════════════════════════════════════════════════════════════════╝\n');
 
-const client = new Client();
+console.log('📦 Criando cliente WhatsApp...');
+const client = new Client({
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    }
+});
+
 const userStages = {};
 const userData = {};
 const INACTIVITY_TIMEOUT = 30 * 60 * 1000;
@@ -32,21 +40,25 @@ const isInitialTrigger = text => /(oi|ola|olá|menu|boa tarde|boa noite|bom dia)
 // ═══════════════════════════════════════════════════════════════════
 
 client.on('qr', qr => {
-    console.log('\n╔════════════════════════════════════════════════════════════════╗');
-    console.log('║                     QR CODE GERADO                            ║');
-    console.log('╚════════════════════════════════════════════════════════════════╝\n');
-    
-    // Gera o QR code visual
-    qrcode.generate(qr, { small: true });
-    
-    // Log detalhado da URL
-    console.log('\n' + '═'.repeat(70));
-    console.log('📱 QR CODE URL:');
-    console.log('═'.repeat(70));
-    console.log(qr);
-    console.log('═'.repeat(70));
-    console.log('💡 Dica: Escaneie o QR code acima com seu WhatsApp Web para conectar!');
-    console.log('═'.repeat(70) + '\n');
+    try {
+        console.log('\n╔════════════════════════════════════════════════════════════════╗');
+        console.log('║                     QR CODE GERADO!                           ║');
+        console.log('╚════════════════════════════════════════════════════════════════╝\n');
+        
+        // Gera o QR code visual
+        qrcode.generate(qr, { small: true });
+        
+        // Log detalhado da URL
+        console.log('\n' + '═'.repeat(70));
+        console.log('📱 QR CODE URL:');
+        console.log('═'.repeat(70));
+        console.log(qr);
+        console.log('═'.repeat(70));
+        console.log('💡 Dica: Escaneie o QR code acima com seu WhatsApp Web para conectar!');
+        console.log('═'.repeat(70) + '\n');
+    } catch (error) {
+        console.error('❌ Erro ao gerar QR code:', error.message);
+    }
 });
 
 client.on('ready', () => {
@@ -62,7 +74,11 @@ process.on('unhandledRejection', error => {
     console.error('❌ ERRO NÃO TRATADO:', error);
 });
 
-client.initialize();
+console.log('🔄 Inicializando cliente WhatsApp...');
+client.initialize().catch(error => {
+    console.error('❌ ERRO ao inicializar:', error.message);
+    process.exit(1);
+});
 
 // ═══════════════════════════════════════════════════════════════════
 //                    RESPOSTAS CENTRALIZADAS

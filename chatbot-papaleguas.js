@@ -85,7 +85,7 @@ const RESPONSES = {
     
     AGUARDANDO_PAGAMENTO: '*Como você prefere pagar?*\n\n1️⃣ Pix\n2️⃣ Dinheiro\n3️⃣ Cartão na entrega',
     
-    PEDIDO_TUDO_JUNTO: '📝 *Envie seu pedido:*\n\n✍️ Inclua o máximo de informações que puder:\n• Seu nome\n• O que deseja pedir\n• Endereço de entrega\n• Forma de pagamento (Pix, Dinheiro ou Cartão)\n\n💡 Pode enviar de qualquer jeito! Um atendente entrará em contato para confirmar.',
+    PEDIDO_TUDO_JUNTO: '📝 *Envie seu pedido do jeito que preferir!*\n\n💬 Pode ser:\n• Uma lista de itens\n• Uma descrição simples\n• Qualquer coisa que queira pedir\n\n✨ Não precisa de formato específico! Um atendente entrará em contato para confirmar os detalhes (nome, endereço, forma de pagamento) e informar o valor.',
     
     PEDIDO_CONFIRMACAO: (nome, pedido, endereco) => 
         `✅ *RESUMO DO PEDIDO*\n\n👤 Nome: ${nome}\n🍽️ Pedido: ${pedido}\n📍 Endereço: ${endereco}\n💰 Taxa: R$ 3,00\n\nTudo certo? Digite *SIM* ou *NÃO*`,
@@ -144,7 +144,7 @@ client.on('message', async (msg) => {
 
     // Volta ao menu a partir de SUPORTE
     if (state === 'SUPORTE' && isInitialTrigger(body)) {
-        await client.sendMessage(from, RESPONSES.BOAS_VINDAS);
+        await client.sendMessage(from,qro q nao seja  RESPONSES.BOAS_VINDAS);
         userStages[from] = 'MENU_PRINCIPAL';
         return;
     }

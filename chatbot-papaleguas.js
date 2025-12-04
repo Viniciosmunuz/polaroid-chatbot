@@ -85,7 +85,7 @@ const RESPONSES = {
     
     AGUARDANDO_PAGAMENTO: '*Como você prefere pagar?*\n\n1️⃣ Pix\n2️⃣ Dinheiro\n3️⃣ Cartão na entrega',
     
-    PEDIDO_TUDO_JUNTO: 'Por favor, envie seu pedido!\n\n📝 *Sugestão de Formato:*\nNome: Seu Nome Completo\nPedido: O que você quer comer\nEndereço: Rua, número, bairro\nPagamento: 1 (Pix) / 2 (Dinheiro) / 3 (Cartão)\n\nUm atendente entrará em contato para finalizar os detalhes.\n\nObrigado por escolher o Restaurante PAPALEGUAS! 🍽️',
+    PEDIDO_TUDO_JUNTO: 'Envie seu pedido! 📝\n\nUm atendente entrará em contato para confirmar os detalhes, o valor total e o tempo de entrega.\n\nObrigado por escolher o Restaurante PAPALEGUAS! 🍽️',
     
     PEDIDO_CONFIRMACAO: (nome, pedido, endereco) => 
         `✅ *RESUMO DO PEDIDO*\n\n👤 Nome: ${nome}\n🍽️ Pedido: ${pedido}\n📍 Endereço: ${endereco}\n💰 Taxa: R$ 3,00\n\nTudo certo? Digite *SIM* ou *NÃO*`,

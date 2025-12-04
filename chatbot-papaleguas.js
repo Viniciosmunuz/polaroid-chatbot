@@ -8,6 +8,8 @@ require('dotenv').config();
 const qrcode = require('qrcode-terminal');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
+// VERSÃO: 2024-12-04 - Fluxo passo a passo sem validação
+
 // ─── CONSTANTES ───
 const client = new Client({
     authStrategy: new LocalAuth(),
@@ -226,52 +228,16 @@ client.on('message', async (msg) => {
       userStages[from] = 'PEDIDO_CONFIRMADO';
       return;
     }
-    }
 
-    if (state === 'PEDIDO_AGUARDANDO_CONFIRMACAO') {
-      const confirmacao = body.toUpperCase().trim();
-      if (confirmacao === 'SIM' || confirmacao === 'S') {
-        const { nome, pedido, endereco, pagamento } = userData[from];
-        const numeroCliente = from.replace('@c.us', '');
-        await client.sendMessage(from, RESPONSES.PEDIDO_CONFIRMADO(nome, pedido, endereco, pagamento));
-        await delay(1000);
-        await client.sendMessage(ownerNumber, RESPONSES.PEDIDO_AVISO_DONO(nome, numeroCliente, pedido, endereco));
-        userStages[from] = 'PEDIDO_CONFIRMADO';
-        return;
-      }
-      if (confirmacao === 'NÃO' || confirmacao === 'NAO' || confirmacao === 'N') {
-        await client.sendMessage(from, `Pedido cancelado.\n\n${RESPONSES.BOAS_VINDAS}`);
-        userStages[from] = 'MENU_PRINCIPAL';
-        delete userData[from];
-        return;
-      }
-      await client.sendMessage(from, '⚠️ Digite *SIM* ou *NÃO*');
-      return;
-    }
-
+    // Estado final: pedido já foi confirmado
     if (state === 'PEDIDO_CONFIRMADO') {
-        await client.sendMessage(from, '✅ Seu pedido está sendo processado! Um atendente entrará em contato em breve.');
-        return;
-    }
-
-    // Forma livre de pedido (opção 2)
-    if (state === 'PEDIDO_FORMA_LIVRE') {
         if (isInitialTrigger(body)) {
             await client.sendMessage(from, RESPONSES.BOAS_VINDAS);
             userStages[from] = 'MENU_PRINCIPAL';
             delete userData[from];
-            return;
+        } else {
+            await client.sendMessage(from, '✅ Seu pedido está sendo processado! Um atendente entrará em contato em breve.');
         }
-        
-        const numeroCliente = from.replace('@c.us', '');
-        const nomeCliente = userData[from]?.nome || 'Cliente';
-        
-        // Enviar o pedido para o dono
-        const avisoFormaLivre = `🚨 *PEDIDO RECEBIDO (FORMA LIVRE)* 🚨\n\n👤 Cliente: ${nomeCliente}\n📱 https://wa.me/${numeroCliente}\n\n📝 Mensagem:\n${body}\n\n👉 *AÇÃO:* Verifique com o cliente os detalhes (nome, endereço, forma de pagamento) e informe o valor.`;
-        
-        await client.sendMessage(ownerNumber, avisoFormaLivre);
-        await client.sendMessage(from, '✅ Seu pedido foi enviado!\n\n⏳ Um atendente entrará em contato em breve para confirmar os detalhes.');
-        userStages[from] = 'PEDIDO_CONFIRMADO';
         return;
     }
 
@@ -283,4 +249,3 @@ client.on('message', async (msg) => {
     console.error('❌ Erro:', err.message);
   }
 });
-// Fim do arquivo

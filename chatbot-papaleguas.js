@@ -85,7 +85,7 @@ const RESPONSES = {
     
     AGUARDANDO_PAGAMENTO: '*Como você prefere pagar?*\n\n1️⃣ Pix\n2️⃣ Dinheiro\n3️⃣ Cartão na entrega',
     
-    PEDIDO_TUDO_JUNTO: '📝 *Envie seu pedido do jeito que preferir!*\n\n💬 Pode ser:\n• Uma lista de itens\n• Uma descrição simples\n• Qualquer coisa que queira pedir\n\n✨ Não precisa de formato específico! Um atendente entrará em contato para confirmar os detalhes (nome, endereço, forma de pagamento) e informar o valor.',
+    PEDIDO_TUDO_JUNTO: 'Por favor, envie seu pedido com os seguintes dados:\n\n📝 *Formato:*\nNome: Seu Nome Completo\nPedido: O que você quer comer\nEndereço: Rua, número, bairro\nPagamento: 1 (Pix) / 2 (Dinheiro) / 3 (Cartão)',
     
     PEDIDO_CONFIRMACAO: (nome, pedido, endereco) => 
         `✅ *RESUMO DO PEDIDO*\n\n👤 Nome: ${nome}\n🍽️ Pedido: ${pedido}\n📍 Endereço: ${endereco}\n💰 Taxa: R$ 3,00\n\nTudo certo? Digite *SIM* ou *NÃO*`,

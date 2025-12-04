@@ -107,10 +107,7 @@ const RESPONSES = {
     INATIVIDADE: 'Ficamos inativos por um tempo. Digite *Menu* para recomeçar.',
     RESPOSTA_PADRAO: 'Não entendi. Digite *Menu* para ver as opções.',
 };
-
-// ═══════════════════════════════════════════════════════════════════
-//                    PROCESSADOR DE MENSAGENS
-// ═══════════════════════════════════════════════════════════════════
+      // Mensagens removidas: pedido agora é livre
 
 client.on('message', async (msg) => {
   try {
@@ -184,12 +181,7 @@ client.on('message', async (msg) => {
     // ═══════════════════════════════════════════════════════════════════
     // 🛍️ FLUXO DE PEDIDO
     // ═══════════════════════════════════════════════════════════════════
-    if (state === 'AGUARDANDO_NOME') {
-      await client.sendMessage(from, RESPONSES.PEDIDO_TUDO_JUNTO);
-      userStages[from] = 'AGUARDANDO_DADOS_COMPLETOS';
-      userData[from] = userData[from] || {};
-      return;
-    }
+      // Estado AGUARDANDO_NOME removido: pedido é livre
 
     if (state === 'AGUARDANDO_DADOS_COMPLETOS') {
       // Aceitar mensagem em qualquer formato - sem validação obrigatória
@@ -259,8 +251,8 @@ client.on('message', async (msg) => {
     if (state && state !== 'SUPORTE') {
         await client.sendMessage(from, RESPONSES.RESPOSTA_PADRAO);
     }
-
   } catch (err) {
     console.error('❌ Erro:', err.message);
   }
 });
+// Fim do arquivo

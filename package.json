@@ -1,14 +1,14 @@
 {
-  "name": "whatsapp-bot-polaroid",
+  "name": "whatsapp-bot-papaleguas",
   "version": "1.0.0",
-  "description": "Bot WhatsApp para Espaço Polaroid - Gerenciamento de pedidos e orçamentos",
-  "main": "chatbot.js",
+  "description": "Bot WhatsApp para Restaurante e Lanchonete PAPALEGUAS - Gerenciamento de pedidos",
+  "main": "chatbot-papaleguas.js",
   "scripts": {
-    "start": "node chatbot.js",
-    "dev": "node chatbot.js",
-    "test": "node test-bot.js"
+    "start": "node chatbot-papaleguas.js",
+    "dev": "node chatbot-papaleguas.js",
+    "test": "node teste-novo.js"
   },
-  "keywords": ["whatsapp", "bot", "polaroid", "eventos"],
+  "keywords": ["whatsapp", "bot", "restaurant", "papaleguas"],
   "author": "",
   "license": "MIT",
   "dependencies": {

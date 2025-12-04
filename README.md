@@ -1,12 +1,12 @@
-# Bot WhatsApp - Espaço Polaroid 📸
+# Bot WhatsApp - Restaurante e Lanchonete PAPALEGUAS 🍽️
 
-Bot de atendimento automático que gerencia pedidos de fotos Polaroid, orçamentos de eventos e serviços de drone.
+Bot de atendimento automático para receber pedidos e gerenciar reservas de forma inteligente via WhatsApp.
 
 ## ⚡ Quick Start
 
 ```bash
 npm install
-node chatbot.js
+node chatbot-papaleguas.js
 ```
 
 ## 🔧 Configuração
@@ -23,31 +23,58 @@ Na primeira execução, escaneie o QR code com WhatsApp para autenticar.
 
 ## ✨ Funcionalidades
 
-- ✅ Menu com 5 opções
-- ✅ Pedidos (nome, quantidade, endereço)
-- ✅ Orçamentos (eventos e drone)
-- ✅ Suporte automático
-- ✅ Captura de mídia (fotos/vídeos)
+- ✅ Menu com 2 opções principais
+- ✅ Cardápio, horário e taxa visíveis no menu
+- ✅ Pedidos com formato estruturado
+- ✅ Suporte ao atendente (forma livre)
 - ✅ Máquina de estados
 - ✅ Timeout após 30 min inatividade
 - ✅ Bloqueia grupos e contatos salvos
+- ✅ Confirmação de pedido
 
 ## 📂 Estrutura
 
 ```
-├── chatbot.js       # Lógica principal
-├── test-bot.js      # Teste interativo
-├── package.json     # Dependências
-├── .env            # Configurações (não commitado)
-└── README.md       # Este arquivo
+├── chatbot-papaleguas.js  # Lógica principal do bot
+├── teste-novo.js          # Teste interativo local
+├── package.json           # Dependências
+├── .env                   # Configurações (não commitado)
+└── README.md              # Este arquivo
 ```
 
 ## 🎯 Fluxos
 
-| Opção | Fluxo |
-|-------|-------|
-| **1** | Link do catálogo |
-| **2** | Pedido: Nome → Qtd → Endereço |
+| Opção | Descrição |
+|-------|-----------|
+| **1** | **Fazer um Pedido** - Formato estruturado (Nome, Pedido, Endereço, Pagamento) |
+| **2** | **Falar com Atendente** - Suporte direto |
+
+## 📋 Formato de Pedido (Opção 1)
+
+```
+Nome: Seu Nome Completo
+Pedido: O que você quer comer
+Endereço: Rua, número, bairro
+Pagamento: 1 (Pix) / 2 (Dinheiro) / 3 (Cartão)
+```
+
+## ⏰ Informações do Restaurante
+
+- **Horário:** Todos os dias 5:30 - 23:30
+- **Taxa de Entrega:** R$ 3,00
+- **Cardápio:** [Google Drive Link](https://drive.google.com/file/d/1-exemplo-cardapio/view?usp=drive_link)
+
+## 🚀 Deploy
+
+O bot está pronto para rodar em Railway, Heroku ou similar.
+
+Certifique-se de adicionar `OWNER_NUMBER` nas variáveis de ambiente da plataforma.
+
+## 📝 Notas
+
+- O bot ignora grupos e contatos salvos
+- Reseta automaticamente após 30 minutos de inatividade
+- Envia notificações para o proprietário com cada novo pedido
 | **3** | Orçamento: Tipo → Data |
 | **4** | Suporte humano |
 | **5** | Drone: Nome |

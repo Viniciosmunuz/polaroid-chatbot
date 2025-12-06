@@ -1,15 +1,4 @@
-FROM node:18-alpine
-
-# Instalar dependências do sistema necessárias para Chromium
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    freetype-dev \
-    harfbuzz \
-    ca-certificates \
-    ttf-dejavu \
-    dumb-init
+FROM ghcr.io/puppeteer/puppeteer:21.6.0
 
 WORKDIR /app
 

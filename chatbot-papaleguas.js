@@ -15,15 +15,16 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        executablePath: '/usr/bin/chromium-browser',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
-            '--disable-extensions',
-            '--disable-component-extensions-with-background-pages'
+            '--no-default-browser-check'
         ]
+    },
+    webVersionCache: {
+        type: 'remote'
     }
 });
 

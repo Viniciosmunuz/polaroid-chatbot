@@ -1,13 +1,21 @@
 FROM node:18-alpine
 
-# Instalar only essential dependencies
+# Instalar dependências necessárias para Chromium
 RUN apk add --no-cache \
     chromium \
-    ca-certificates
+    chromium-chromedriver \
+    nss \
+    freetype \
+    freetype-dev \
+    harfbuzz \
+    ca-certificates \
+    ttf-dejavu
 
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Copiar package.json
 COPY package.json ./

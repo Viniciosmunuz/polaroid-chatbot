@@ -12,20 +12,7 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 
 // ─── CONSTANTES ───
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: {
-        headless: true,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu',
-            '--no-default-browser-check'
-        ]
-    },
-    webVersionCache: {
-        type: 'remote'
-    }
+    authStrategy: new LocalAuth()
 });
 
 // Armazena o estado de conversa de cada usuário

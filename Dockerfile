@@ -1,4 +1,9 @@
-FROM ghcr.io/puppeteer/puppeteer:21.6.0
+FROM node:18-alpine
+
+# Instalar only essential dependencies
+RUN apk add --no-cache \
+    chromium \
+    ca-certificates
 
 WORKDIR /app
 
@@ -13,6 +18,5 @@ RUN npm install --legacy-peer-deps --omit=dev
 # Copiar código da aplicação
 COPY . .
 
-# Usar dumb-init para iniciar o processo
-ENTRYPOINT ["dumb-init", "--"]
+# Comando para iniciar a aplicação
 CMD ["npm", "start"]
